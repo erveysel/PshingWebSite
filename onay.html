@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onay Bilgilendirme</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    function goBack() {
+      if (document.referrer !== "") {
+        window.location.href = document.referrer;
+      } else {
+        window.location.href = "index.php"; // Geçmiş yoksa varsayılan olarak anasayfaya yönlendir.
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Navigasyon -->
+  
+
+  <!-- Ana İçerik -->
+  <div class="application-page">
+    <div class="application-form" style="max-width: 800px;">
+      <div class="form-header">
+        <h1><i class="fas fa-clipboard-check"></i> Onay Bilgilendirme</h1>
+      </div>
+      <div style="padding: 1rem;">
+        <p>
+          Bu sayfada, "Sadece okudum, onaylıyorum" onay kutusunun detaylarını bulabilirsiniz. 
+          Lütfen aşağıdaki bilgileri dikkatlice okuyunuz. Onayınızı verirken ilgili şartlar ve koşulları kabul etmiş sayılacaksınız.
+        </p>
+        
+        <div class="data-box" style="margin: 2rem 0; padding: 1.5rem; background: rgba(0,0,0,0.05); border-radius: 10px; border-left: 4px solid var(--primary-color);">
+          <h3><i class="fas fa-info-circle"></i> Önemli Bilgilendirme</h3>
+          <p>Başvuru formunda verdiğiniz bilgiler, değerlendirme sürecinde ve iletişim amacıyla kullanılacaktır. Verileriniz hiçbir şekilde üçüncü taraflarla paylaşılmayacak ve yasal yükümlülükler dışında kullanılmayacaktır.</p>
+          <p>Onay vererek:</p>
+          <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>Verilerinizin başvuru değerlendirme sürecinde kullanılmasını,</li>
+            <li>Sizinle iletişime geçilmesini,</li>
+            <li>Başvurunuzun bir sonraki aşamaya geçmesi durumunda daha detaylı bilgi istenmesini kabul etmiş olursunuz.</li>
+          </ul>
+        </div>
+        
+        <p>
+          Herhangi bir sorunuz varsa, lütfen bizimle iletişime geçmekten çekinmeyiniz.
+        </p>
+      </div>
+      
+      <!-- Geri Dön Butonu -->
+      <div class="form-submit">
+        <button type="button" class="submit-button" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i> Geri Dön
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobil menü toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          this.querySelector('i').classList.toggle('fa-bars');
+          this.querySelector('i').classList.toggle('fa-times');
+        });
+      }
+      
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        const dropbtn = dropdown.querySelector('.dropbtn');
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        
+        // Tıklama olayını dinle
+        dropbtn.addEventListener('click', function(e) {
+          e.preventDefault(); // Link tıklamasını engelle
+          
+          // Diğer açık dropdownları kapat
+          document.querySelectorAll('.dropdown-content').forEach(content => {
+            if (content !== dropdownContent) {
+              content.classList.remove('show');
+            }
+          });
+          
+          // Tıklanan dropdownı aç/kapat
+          dropdownContent.classList.toggle('show');
+        });
+        
+        // Sayfa herhangi bir yerine tıklandığında dropdown'ı kapat
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownContent.classList.remove('show');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

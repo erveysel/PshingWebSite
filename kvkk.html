@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KVKK Aydınlatma Metni</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    function goBack() {
+      if (document.referrer !== "") {
+        window.location.href = document.referrer;
+      } else {
+        window.location.href = "index.php";
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Navigasyon -->
+  
+
+  <!-- Ana İçerik -->
+  <div class="application-page">
+    <div class="application-form" style="max-width: 800px;">
+      <div class="form-header">
+        <h1><i class="fas fa-shield-alt"></i> KVKK Aydınlatma Metni</h1>
+      </div>
+      <div style="padding: 1rem;">
+        <p>
+          Bu sayfa, Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında, kişisel verilerinizin hangi amaçlarla işlendiği ve saklandığına dair bilgileri içermektedir.
+        </p>
+        
+        <div class="data-box" style="margin: 2rem 0; padding: 1.5rem; background: rgba(0,0,0,0.05); border-radius: 10px; border-left: 4px solid var(--primary-color);">
+          <h3><i class="fas fa-info-circle"></i> Veri İşleme Şartları</h3>
+          <p>Kişisel verileriniz, başvuru sürecinin yönetimi ve yasal yükümlülüklerin yerine getirilmesi amacıyla işlenmekte olup, üçüncü şahıslarla paylaşılmadan güvenli bir ortamda saklanmaktadır.</p>
+          
+          <h4 style="margin-top: 1.5rem;">İşlenen Veriler</h4>
+          <ul style="margin-left: 1.5rem;">
+            <li>Kimlik Bilgileri: Ad, soyad, TC kimlik numarası</li>
+            <li>İletişim Bilgileri: E-posta adresi, telefon numarası</li>
+            <li>Eğitim Bilgileri: Üniversite, bölüm</li>
+            <li>Özgeçmiş Bilgileri: Başvurunuzda paylaştığınız bilgiler</li>
+          </ul>
+          
+          <h4 style="margin-top: 1.5rem;">Veri Güvenliği</h4>
+          <p>Kişisel verilerinizin güvenliğini sağlamak amacıyla teknik ve idari tedbirler alınmaktadır. Bu tedbirler arasında erişim sınırlamaları, şifreleme ve fiziksel güvenlik önlemleri bulunmaktadır.</p>
+        </div>
+        
+        <p>
+          Lütfen metni dikkatlice okuyunuz. Sorularınız olması durumunda bizimle iletişime geçebilirsiniz.
+        </p>
+      </div>
+      
+      <!-- Geri Dön Butonu -->
+      <div class="form-submit">
+        <button type="button" class="submit-button" onclick="goBack()">
+          <i class="fas fa-arrow-left"></i> Geri Dön
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobil menü toggle
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+      
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          this.querySelector('i').classList.toggle('fa-bars');
+          this.querySelector('i').classList.toggle('fa-times');
+        });
+      }
+      
+      const dropdowns = document.querySelectorAll('.dropdown');
+      
+      dropdowns.forEach(dropdown => {
+        const dropbtn = dropdown.querySelector('.dropbtn');
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        
+        // Tıklama olayını dinle
+        dropbtn.addEventListener('click', function(e) {
+          e.preventDefault(); // Link tıklamasını engelle
+          
+          // Diğer açık dropdownları kapat
+          document.querySelectorAll('.dropdown-content').forEach(content => {
+            if (content !== dropdownContent) {
+              content.classList.remove('show');
+            }
+          });
+          
+          // Tıklanan dropdownı aç/kapat
+          dropdownContent.classList.toggle('show');
+        });
+        
+        // Sayfa herhangi bir yerine tıklandığında dropdown'ı kapat
+        document.addEventListener('click', function(e) {
+          if (!dropdown.contains(e.target)) {
+            dropdownContent.classList.remove('show');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

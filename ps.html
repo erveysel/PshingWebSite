@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dikkat! Siber Güvenlik Uyarısı</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --warning-color: #ff3b30;
+            --success-color: #34c759;
+            --info-color: #007aff;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        
+        .phishing-alert {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 7rem 2rem 2rem;
+            background: linear-gradient(135deg, #1a237e, #ff3b30);
+            color: white;
+            position: relative;
+        }
+        
+        .alert-icon {
+            font-size: 5rem;
+            color: #ff3b30;
+            background: white;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            animation: pulse 2s infinite;
+        }
+        
+        .attention-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.5s ease forwards;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .attention-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.5s ease forwards 0.3s;
+            opacity: 0;
+            max-width: 800px;
+        }
+        
+        .security-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 2rem;
+        }
+        
+        .security-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            color: #333;
+            text-align: left;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .security-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .security-card:nth-child(1) {
+            animation-delay: 0.5s;
+            border-top: 5px solid var(--warning-color);
+        }
+        
+        .security-card:nth-child(2) {
+            animation-delay: 0.7s;
+            border-top: 5px solid #ff9500;
+        }
+        
+        .security-card:nth-child(3) {
+            animation-delay: 0.9s;
+            border-top: 5px solid var(--info-color);
+        }
+        
+        .security-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+        }
+        
+        .security-card h3 i {
+            color: var(--warning-color);
+            font-size: 1.5rem;
+        }
+        
+        .security-card:nth-child(2) h3 i {
+            color: #ff9500;
+        }
+        
+        .security-card:nth-child(3) h3 i {
+            color: var(--info-color);
+        }
+        
+        .security-card p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .security-card ul {
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .security-card ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: #ffff00;
+            padding: 0 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .data-exposed {
+            background-color: rgba(255, 59, 48, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .data-exposed-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--warning-color);
+        }
+        
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #ddd;
+            padding: 8px 0;
+        }
+        
+        .learn-more-btn {
+            background: white;
+            color: #1a237e;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease forwards 1.2s;
+            opacity: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .learn-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: #1a237e;
+            color: white;
+        }
+        
+        .home-btn {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 59, 48, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .footer-note {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            animation: fadeInUp 0.5s ease forwards 1.4s;
+            opacity: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .security-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .attention-title {
+                font-size: 2rem;
+            }
+            
+            .attention-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .alert-icon {
+                width: 90px;
+                height: 90px;
+                font-size: 3.5rem;
+            }
+        }
+        
+        /* İkinci bölüm animasyonları */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-down i {
+            color: white;
+            font-size: 2rem;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        /* URL Bar Similasyonu */
+        .url-bar {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-align: left;
+            font-size: 0.9rem;
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 0.5s ease forwards 0.4s;
+            opacity: 0;
+        }
+        
+        .url-bar i {
+            color: #ccc;
+            margin-right: 0.5rem;
+        }
+        
+        .url-bar .url {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .url-highlight {
+            color: var(--warning-color);
+            font-weight: bold;
+        }
+        
+        .warning-badge {
+            background-color: var(--warning-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 0.8rem;
+        }
+        
+        .warning-badge i {
+            margin-right: 0.3rem;
+            color: white;
+            font-size: 0.7rem;
+        }
+        
+        /* Quiz Bölümü */
+        .quiz-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            animation: fadeInUp 0.5s ease forwards 1.5s;
+            opacity: 0;
+        }
+        
+        .quiz-section h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .quiz-question {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .quiz-option {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        .quiz-option.correct {
+            background: rgba(52, 199, 89, 0.3);
+            border-color: var(--success-color);
+        }
+        
+        .quiz-option.incorrect {
+            background: rgba(255, 59, 48, 0.3);
+            border-color: var(--warning-color);
+        }
+        
+        .quiz-explanation {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .quiz-explanation.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigasyon -->
+   
+    
+    <div class="phishing-alert">
+        <div class="alert-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="attention-title">Siber Güvenlik Farkındalık Testi</h1>
+        <p class="attention-subtitle">
+            Az önce kimlik bilgilerinizi bir web sitesiyle paylaştınız! Bu bir <span class="highlight">phishing farkındalık eğitimiydi</span>.
+        </p>
+        
+        <!-- URL Bar Simulasyonu -->
+        <div class="url-bar">
+            <i class="fas fa-lock-open"></i>
+            <div class="url">
+                <span class="url-highlight">siberacademy.com</span>/basvuru.php 
+                <span style="font-size:0.8rem; color: #888;">(Olması gereken: siberacademy.com)</span>
+            </div>
+            <div class="warning-badge">
+                <i class="fas fa-exclamation-triangle"></i> Güvenli Değil
+            </div>
+        </div>
+        
+        <div class="security-cards">
+            <div class="security-card">
+                <h3><i class="fas fa-user-shield"></i> Paylaştığınız Kritik Bilgiler</h3>
+                <p>Az önce doldurduğunuz formda aşağıdaki <strong>hassas bilgilerinizi</strong> paylaştınız:</p>
+                
+                <div class="data-exposed">
+                    <div class="data-exposed-title">Paylaşılan Veriler:</div>
+                    <div class="data-item">
+                        <span>T.C. Kimlik Numarası</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: var(--warning-color);"></i> Kritik</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Anne Kızlık Soyadı</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: var(--warning-color);"></i> Kritik</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Adres Bilgileri</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: var(--warning-color);"></i> Kritik</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Ad Soyad</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                    <div class="data-item">
+                        <span>E-posta Adresi</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Telefon Numarası</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Anne/Baba Adı</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Doğum Tarihi ve Yeri</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                    <div class="data-item">
+                        <span>Medeni Hal</span>
+                        <span><i class="fas fa-exclamation-circle" style="color: #ff9500;"></i> Orta</span>
+                    </div>
+                </div>
+                
+                <p>Bu bilgiler <strong>kimlik hırsızlığı</strong> için kullanılabilir. Özellikle banka hesap bilgileri, kimlik belgeleri ve kişisel bilgileriniz kötü niyetli kişiler tarafından kullanılabilir. Anne kızlık soyadı ve TC Kimlik Numarası, banka ve devlet kurumlarında kimlik doğrulama amaçlı kullanılan bilgilerdir.</p>
+            </div>
+            
+            <div class="security-card">
+                <h3><i class="fas fa-search"></i> Kaçırdığınız İpuçları</h3>
+                <p>Bu phishing saldırısında şu ipuçlarına dikkat etmeliydiniz:</p>
+                <ul>
+                    <li>Anne kızlık soyadı, baba adı gibi <strong>çok kişisel sorular</strong> normal başvurularda istenmez</li>
+                    <li>TC Kimlik Numarası, ehliyet ve pasaport numarası gibi <strong>kimlik belgeleri</strong> tek başına kullanılmamalıdır</li>
+                    <li>Banka hesap bilgileri ve IBAN gibi <strong>finansal bilgiler</strong> staj başvurusunda istenmez</li>
+                    <li>Iletişim sayfasındaki ve footer kısmındaki bilgerin<strong> Yanlış ve saçma</strong> olması</li>
+                    <li>URL'in resmi site adresine benzer ama farklı olması (örneğin i harfi yerine ı harfi kullanımı)</li>
+                    <li>60 saniye bekletme gibi <strong>aciliyet hissi yaratma</strong> teknikleri</li>
+                    <li>KVKK metninin içeriğinin yüzeysel olması ve detay bilgi içermemesi</li>
+                </ul>
+            </div>
+            
+            <div class="security-card">
+                <h3><i class="fas fa-shield-alt"></i> Kendinizi Nasıl Korursunuz?</h3>
+                <p>Phishing saldırılarından korunmak için:</p>
+                <ul>
+                    <li>Asla tanımadığınız sitelere kritik bilgilerinizi girmeyin</li>
+                    <li>URL'i ve şirket bilgilerini doğrulayın (Türkçe karakterlerin kullanımına dikkat edin)</li>
+                    <li>İki faktörlü kimlik doğrulamayı etkinleştirin</li>
+                    <li>Beklenmedik e-postaları ve bağlantıları açmaktan kaçının</li>
+                    <li>Acil eylem gerektiren mesajlara şüpheyle yaklaşın</li>
+                    <li>Güvenlik yazılımları kullanın</li>
+                    <li>Tarayıcınızdaki güvenlik uyarılarını dikkate alın</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Quiz Bölümü -->
+        <div class="quiz-section">
+            <h3><i class="fas fa-question-circle"></i> Hadi Test Edelim!</h3>
+            <div class="quiz-question">
+                <p>Siz önemli bir bankada çalışan bir kişisiniz. Aşağıdaki e-posta uzun zamandır çalıştığınız bir müşteriden geldi. Hangi seçenek doğru hareket tarzıdır?</p>
+                
+                <div style="background: #fff; padding: 1rem; border-radius: 10px; color: #333; text-align: left; margin: 1rem 0;">
+                    <strong>Kimden:</strong> turkiye-is-bankasi-guvenlik@turkyebankasi.co<br>
+                    <strong>Konu:</strong> ACİL: Hesabınızla ilgili önemli güvenlik uyarısı<br><br>
+                    <p>Sayın müşterimiz,</p>
+                    <p>Hesabınızda şüpheli bir işlem tespit edildi. Hesabınızın bloke edilmemesi için lütfen aşağıdaki bağlantıya tıklayarak bilgilerinizi doğrulayın.</p>
+                    <p>Bu işlem için sadece <strong>24 saat</strong> süreniz var.</p>
+                    <p><a href="#" style="color: blue;">https://turkiye-isbank-login.com/dogrulama</a></p>
+                </div>
+            </div>
+            
+            <div class="quiz-options">
+                <div class="quiz-option" data-correct="false" onclick="checkAnswer(this, false)">
+                    <p>Bağlantıya tıklayıp müşterimin hesabıyla ilgili sorunu çözmek için hemen harekete geçmeliyim.</p>
+                </div>
+                <div class="quiz-option" data-correct="true" onclick="checkAnswer(this, true)">
+                    <p>Bu bir phishing e-postası olabilir. Müşterime başka bir kanaldan (telefon) ulaşarak durumu kontrol etmeliyim.</p>
+                </div>
+            </div>
+            
+            <div class="quiz-explanation" id="quiz-explanation">
+                <p><strong>Doğru cevap:</strong> Bu e-posta birçok phishing belirtisi gösteriyor:</p>
+                <ul>
+                    <li>Gönderici adresi "turkyebankasi.co" (resmi bir banka adresi böyle olmaz)</li>
+                    <li>Aciliyet yaratarak ("24 saat") hızlı hareket etmeye zorluyor</li>
+                    <li>Bağlantı adresi resmi İş Bankası adresi değil</li>
+                    <li>Yazım hataları var ("turkye" gibi)</li>
+                </ul>
+                <p>Bu tür durumlarda, müşteri ile hiçbir zaman e-postadaki linkten gitmemeli, doğrudan banka şubesi veya müşteri hizmetleri üzerinden iletişime geçmelisiniz.</p>
+            </div>
+        </div>
+        
+        <a href="https://bgt.fsm.edu.tr" target="_blank" class="learn-more-btn">
+            <i class="fas fa-book"></i> Daha Fazla Güvenlik Bilgisi Edin
+        </a>
+        
+        <a href="index.php" class="learn-more-btn home-btn">
+            <i class="fas fa-home"></i> Ana Sayfaya Dön
+        </a>
+        
+        <p class="footer-note">
+            <strong>Not:</strong> Bu bir eğitim simülasyonudur. Girdiğiniz veriler kaydedilmemiştir. Amacımız, siber güvenlik konusunda farkındalık oluşturmak ve phishing saldırılarına karşı sizi bilinçlendirmektir.
+        </p>
+        
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobil menü toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                    this.querySelector('i').classList.toggle('fa-bars');
+                    this.querySelector('i').classList.toggle('fa-times');
+                });
+            }
+        });
+        
+        // Quiz fonksiyonu
+        function checkAnswer(element, isCorrect) {
+            // Tüm seçenekleri sıfırla
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('correct', 'incorrect');
+            });
+            
+            // Doğru veya yanlış sınıfını ekle
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('incorrect');
+            }
+            
+            // Açıklamayı göster
+            document.getElementById('quiz-explanation').classList.add('show');
+        }
+    </script>
+</body>
+</html> 
